@@ -1,3 +1,7 @@
+provider "azurerm" {
+  features {}
+}
+
 # Create network interface
 resource "azurerm_network_interface" "nfs-0" {
     name                      = "nfs-0"
