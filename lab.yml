@@ -82,7 +82,6 @@
     command: sudo pvcreate /dev/disk/azure/scsi1/lun0
     args:
       creates: /etc/delete_to_retry_pvcreate
-  - name: Create pass file
     file:
       path: "/etc/delete_to_retry_pvcreate"
       state: touch
@@ -130,6 +129,8 @@
     zypper:
       name: nfs-kernel-server
       state: present
+    environment:
+      ZYPP_LOCK_TIMEOUT: 120
   - name: Enable nfsd
     command: sudo systemctl enable nfsserver
   - name: Start nfsd
