@@ -20,3 +20,15 @@ offer = "sles-sap-15-sp3"
 sku = "gen2"
 _version = "latest"
 }
+
+module "nfs_server0" {
+source = "./modules/nfs_server"
+rg = module.rg0.rg
+region = module.network0.region
+subnet = module.network0.subnet
+vm_size = "Standard_D8s_v5"
+publisher = "SUSE"
+offer = "sles-sap-15-sp3"
+sku = "gen2"
+_version = "latest"
+}
