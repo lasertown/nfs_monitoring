@@ -64,3 +64,18 @@
       dest: /home/azureadmin/.ssh/config
       owner: azureadmin
       group: users
+
+- name: Comfigure NFS Server
+  hosts: nfs
+  remote_user: azureadmin
+  become: yes
+  tasks:
+  - name: Install NFS Server
+    zypper:
+      name: nfs-kernel-server
+      state: present
+  - name: Enable nfsd
+    command: sudo systemctl enable nfsserver
+  - name: Start nfsd
+    command: sudo systemctl start nfsserver
+    
