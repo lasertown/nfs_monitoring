@@ -1,0 +1,63 @@
+- name: Create lab environment
+  hosts: localhost
+  connection: local
+  tasks:
+  - name: Generate personal SSH keys if they do not already exist
+    openssh_keypair:
+      path: ~/.ssh/id_rsa
+      force: False
+      regenerate: never
+  - name: Generate Lab SSH keys
+    openssh_keypair:
+      path: ~/.ssh/lab_rsa
+      force: False
+      regenerate: never
+  - name: Copy SSH config to localhost
+    copy:
+      src: ssh.config/ssh.config
+      dest: ~/.ssh/config
+  - name: Terraform apply
+    terraform:
+      lock: no
+      force_init: true
+      project_path: './'
+      state: present
+  - name: Terraform refresh
+    shell: terraform refresh ; . ~/.bashrc
+
+- name: Push SSH key to bastion
+  hosts: bastion
+  remote_user: azureadmin
+  become: yes
+  tasks:
+  - name: Set personal authorized key taken from file
+    authorized_key:
+      user: azureadmin
+      state: present
+      key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+  - name: Push SSH azureadmin private key
+    copy:
+      src: ~/.ssh/lab_rsa
+      dest: /home/azureadmin/.ssh/id_rsa
+      mode: '0600'
+      owner: azureadmin
+      group: users
+  - name: Configure etc hosts
+    blockinfile:
+      path: /etc/hosts
+      state: present
+      block: |
+        # NFS Server
+        10.0.0.6 nfs-0
+
+- name: Push SSH config
+  hosts: all
+  debugger: on_failed
+  remote_user: azureadmin
+  tasks:
+  - name: Push SSH config to all VMs
+    copy:
+      src: config/ssh.config
+      dest: /home/azureadmin/.ssh/config
+      owner: azureadmin
+      group: users
