@@ -41,7 +41,7 @@
     meta: refresh_inventory
 
 - name: Push SSH key to bastion
-  hosts: tag_group_bastion
+  hosts: bastion
   remote_user: azureadmin
   become: yes
   tasks:
