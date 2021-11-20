@@ -82,6 +82,7 @@
     command: sudo pvcreate /dev/disk/azure/scsi1/lun0
     args:
       creates: /etc/delete_to_retry_pvcreate
+  - name: Create pass file
     file:
       path: "/etc/delete_to_retry_pvcreate"
       state: touch
