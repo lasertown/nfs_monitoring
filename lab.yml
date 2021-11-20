@@ -24,7 +24,10 @@
       state: present
   - name: Terraform refresh
     shell: terraform refresh
-
+  - name: Pause 1 minute to let VMs boot up
+    pause:
+      minutes: 1
+      
 - name: Push SSH key to bastion
   hosts: bastion
   remote_user: azureadmin
