@@ -14,7 +14,7 @@
       regenerate: never
   - name: Copy SSH config to localhost
     copy:
-      src: ssh.config/ssh.config
+      src: config/ssh.config
       dest: ~/.ssh/config
   - name: Terraform apply
     terraform:
