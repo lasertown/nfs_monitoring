@@ -1,3 +1,8 @@
+# Installation
+## Requires the latest Terraform and Ansible
+Azure Cloudshell has both Terraform and Ansible preinstalled, so cloning and launching from Cloudshell is convienent.
+## Installation in your local Linux environment 
+Cloudshell in the Portal times out after 20 minutes, so installing in your local environment or Linux VM is a good option.  If you use Cloudshell, you will have to hit the keyboard every now and then to prevent a timeout.
 ## Installation in your local Linux environment 
 ### Links to install requirements
 - az CLI
