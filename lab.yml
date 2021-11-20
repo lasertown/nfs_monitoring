@@ -23,7 +23,22 @@
       project_path: './'
       state: present
   - name: Terraform refresh
-    shell: terraform refresh ; . ~/.bashrc
+    shell: terraform refresh
+  - name: Create rg file for dynamic inventory
+    shell: echo { \"rg\":\"`terraform output -raw rg`\" } > rg.json
+  - name: Include vars of stuff.yaml into the 'stuff' variable
+    include_vars:
+      file: rg.json
+      name: stuff
+  - name: Configure dynamic inventory file
+    blockinfile:
+      path: ./myazure_rm.yml
+      state: present
+      block: |
+        include_vm_resource_groups:
+        - {{ stuff["rg"] }}
+  - name: Refresh inventory to ensure new instances exist in inventory
+    meta: refresh_inventory
 
 - name: Push SSH key to bastion
   hosts: bastion
