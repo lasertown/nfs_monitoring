@@ -17,8 +17,8 @@ variable "subnet" {
 # _version   = "latest"
 ################################
 # publisher = "SUSE"
-# offer     = "SLES-SAP"
-# sku       = "12-sp4-gen2"
+# offer     = "sles-sap-15-sp3"
+# sku       = "gen2"
 # _version   = "latest"
 ################################
 variable "publisher" {
