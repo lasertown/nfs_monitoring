@@ -87,7 +87,7 @@
     args:
       creates: /etc/delete_to_retry_vgcreate    
   - name: Create LV
-    command: sudo lvcreate -l 100%FREE -n export0 vg-NFS
+    command: sudo lvcreate -l 100%FREE -n export0 NFS
     args:
       creates: /etc/delete_to_retry_lvcreate
   - name: Create filesystem on LV
