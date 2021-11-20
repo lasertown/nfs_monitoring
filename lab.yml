@@ -84,8 +84,8 @@
       creates: /etc/delete_to_retry_pvcreate
   - name: Create VG
     command: sudo vgcreate NFS /dev/disk/azure/scsi1/lun0
-      args:
-        creates: /etc/delete_to_retry_vgcreate    
+    args:
+      creates: /etc/delete_to_retry_vgcreate    
   - name: Create LV
     command: sudo lvcreate -l 100%FREE -n export0 vg-NFS
     args:
