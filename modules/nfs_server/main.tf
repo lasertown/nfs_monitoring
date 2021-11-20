@@ -2,11 +2,11 @@
 resource "azurerm_network_interface" "nfs-0" {
     name                      = "nfs-0"
     location                  = var.region
-    resource_group_name       = azurerm_resource_group.example.name
+    resource_group_name       = var.rg
 
     ip_configuration {
         name                          = "nfs-0-private"
-        subnet_id                     = azurerm_subnet.example.id
+        subnet_id                     = var.subnet
         private_ip_address_allocation = "Static"
         private_ip_address            = "10.0.0.6"
         primary                       = "true"
@@ -17,9 +17,9 @@ resource "azurerm_network_interface" "nfs-0" {
 resource "azurerm_linux_virtual_machine" "nfs-0" {
     name                  = "nfs-0"
     location              = var.region
-    resource_group_name   = azurerm_resource_group.example.name
+    resource_group_name   = var.rg
     network_interface_ids = [azurerm_network_interface.nfs-0.id]
-    size                  = "Standard_DS2_v2"
+    size                  = var.vm_size
 
     os_disk {
         name              = "nfs-0"
@@ -36,7 +36,6 @@ resource "azurerm_linux_virtual_machine" "nfs-0" {
     }
 
     computer_name  = "nfs-0"
-    availability_set_id = azurerm_availability_set.nfs.id
     admin_username = "azureadmin"
 #    custom_data    = file("<path/to/file>")
 
@@ -49,7 +48,7 @@ resource "azurerm_linux_virtual_machine" "nfs-0" {
 resource "azurerm_managed_disk" "nfs-0a" {
   name                 = "${azurerm_linux_virtual_machine.nfs-0.name}-disk1a"
   location             = var.region
-  resource_group_name  = azurerm_resource_group.example.name
+  resource_group_name  = var.rg
   storage_account_type = "Premium_LRS"
   create_option        = "Empty"
   disk_size_gb         = 100
@@ -64,7 +63,7 @@ resource "azurerm_virtual_machine_data_disk_attachment" "nfs-0a" {
 resource "azurerm_managed_disk" "nfs-0b" {
   name                 = "${azurerm_linux_virtual_machine.nfs-0.name}-disk1b"
   location             = var.region
-  resource_group_name  = azurerm_resource_group.example.name
+  resource_group_name  = var.rg
   storage_account_type = "Premium_LRS"
   create_option        = "Empty"
   disk_size_gb         = 100
