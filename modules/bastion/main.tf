@@ -69,7 +69,7 @@ resource "azurerm_linux_virtual_machine" "bastion" {
     location              = var.region
     resource_group_name   = var.rg
     network_interface_ids = [azurerm_network_interface.nic.id]
-    size                  = "Standard_E4s_v3"
+    size                  = var.vm_size
 
     os_disk {
         name              =  var.region
