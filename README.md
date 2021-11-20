@@ -20,4 +20,4 @@ az login
 
 ### Clone the repository and run this command from root of project folder:
 ```console
-ansible-playbook -i myazure_rm.yml lab.yml
+ansible-playbook -i hosts lab.yml
