@@ -70,6 +70,38 @@
   remote_user: azureadmin
   become: yes
   tasks:
+  - name: Copy /etc/exports
+    copy:
+      src: config/nfs.exports.config
+      dest: /etc/exports
+  - name: Create /srv/nfs mount point
+    file:
+      path: /srv/nfs
+      state: directory
+  - name: Create PV
+    command: sudo pvcreate /dev/disk/azure/scsi1/lun0
+      args:
+        creates: /etc/delete_to_retry_pvcreate
+  - name: Create VG
+    command: sudo vgcreate NFS /dev/disk/azure/scsi1/lun0
+      args:
+        creates: /etc/delete_to_retry_vgcreate    
+  - name: Create LV
+    command: sudo lvcreate -l 100%FREE -n export0 vg-NFS
+      args:
+        creates: /etc/delete_to_retry_lvcreate
+  - name: Create filesystem on LV
+    command: sudo mkfs.xfs /dev/NFS/export0
+      args:
+        creates: /etc/delete_to_retry_mkfs
+  - name: Create fstab entry
+    command: echo "/dev/NFS/export /srv/nfs xfs defaults 0 0" >> /etc/fstab
+      args:
+        creates: /etc/delete_to_retry_fstab
+  - name: Mount all
+    command: sudo mount -a
+      args:
+        creates: /etc/delete_to_retry_mount
   - name: Install NFS Server
     zypper:
       name: nfs-kernel-server
