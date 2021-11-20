@@ -10,6 +10,10 @@ variable "subnet" {
   description = "The subnet for all resources in this module"
 }
 
+variable "vm_size" {
+  description = "The VM size/type"
+}
+
 ################################
 # publisher = "SUSE"
 # offer     = "sles-sap-12-sp5"
