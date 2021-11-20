@@ -11,3 +11,13 @@ Cloudshell in the Portal times out after 20 minutes, so installing in your local
     1. https://learn.hashicorp.com/tutorials/terraform/install-cli
 - Ansible    
     1. https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-specific-operating-systems
+
+# Run the playbook
+## Login az CLI:
+```console
+az login
+```  
+
+### Clone the repository and run this command from root of project folder:
+```console
+ansible-playbook -i myazure_rm.yml lab.yml
