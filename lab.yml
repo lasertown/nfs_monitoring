@@ -151,12 +151,12 @@
     file: 
       path: /srv/nfs/shared
       state: directory
-  - name: Create /srv/nfs/logbackup
+  - name: Create /srv/nfs/logbackups
     file: 
-      path: /srv/nfs/logbackup
-      state: directory      
+      path: /srv/nfs/logbackups
+      state: directory
     
-- name: Create mountpoints
+- name: Configure NFS Clients
   hosts: client
   remote_user: azureadmin
   become: yes
@@ -173,7 +173,19 @@
     file: 
       path: /hana/shared
       state: directory
-  - name: Create /hana/logbackup
+  - name: Create /hana/logbackups
     file: 
-      path: /hana/logbackup
-      state: directory  
+      path: /hana/logbackups
+      state: directory
+  - name: Configure NFS Exports in /etc/fstab
+    blockinfile:
+      path: /etc/fstab
+      state: present
+      block: |
+        # NFS Exports
+        nfs-0:/data /hana/data nfs4 defaults 0 0
+        nfs-0:/log /hana/log nfs4 defaults 0 0
+        nfs-0:/shared /hana/shared nfs4 defaults 0 0
+        nfs-0:/logbackups /hana/logbackups nfs4 defaults 0 0
+  - name: Enable nfsd
+    command: sudo mount -a
