@@ -14,6 +14,10 @@ variable "vm_size" {
   description = "The VM size/type"
 }
 
+variable "private_ip_address" {
+  description = "The VM private IP"
+}
+
 ################################
 # publisher = "SUSE"
 # offer     = "sles-sap-12-sp5"
