@@ -18,14 +18,14 @@ resource "azurerm_network_interface" "nic" {
 
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "client" {
-    name                  = "client-${var.region}"
+    name                  = "client-${random_id.id.hex}"
     location              = var.region
     resource_group_name   = var.rg
     network_interface_ids = [azurerm_network_interface.nic.id]
     size                  = var.vm_size
 
     os_disk {
-        name              = random_id.id.hex + "-" + var.region
+        name              = random_id.id.hex
         caching           = "ReadWrite"
         storage_account_type = "Premium_LRS"
         #disk_size_gb      = "128"
