@@ -29,6 +29,11 @@ variable "private_ip_address" {
 # sku       = "gen2"
 # _version   = "latest"
 ################################
+# publisher = "SUSE"
+# offer     = "sles-15-sp3"
+# sku       = "gen2"
+# _version   = "latest"
+################################
 variable "publisher" {
   description = "Publisher of the image used to create VM"
 }
