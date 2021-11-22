@@ -41,8 +41,8 @@ subnet = module.network0.subnet
 vm_size = "Standard_E4s_v3"
 private_ip_address = "10.0.0.10"
 publisher = "SUSE"
-offer = "SLES"
-sku = "15"
+offer = "sles-15-sp3"
+sku = "gen2"
 _version = "latest"
 }
 
@@ -54,8 +54,8 @@ subnet = module.network0.subnet
 vm_size = "Standard_E4s_v3"
 private_ip_address = "10.0.0.11"
 publisher = "SUSE"
-offer = "SLES"
-sku = "15"
+offer = "sles-15-sp3"
+sku = "gen2"
 _version = "latest"
 }
   
@@ -67,7 +67,7 @@ subnet = module.network0.subnet
 vm_size = "Standard_E4s_v3"
 private_ip_address = "10.0.0.12"
 publisher = "SUSE"
-offer = "SLES"
-sku = "15"
+offer = "sles-15-sp3"
+sku = "gen2"
 _version = "latest"
 }
