@@ -145,8 +145,24 @@
     command: sudo systemctl enable nfsserver
   - name: Start nfsd
     command: sudo systemctl start nfsserver
+  - name: Create /srv/nfs/data
+    file: 
+      path: /srv/nfs/data
+      state: directory
+  - name: Create /srv/nfs/log
+    file: 
+      path: /srv/nfs/log
+      state: directory
+  - name: Create /srv/nfs/shared
+    file: 
+      path: /srv/nfs/shared
+      state: directory
+  - name: Create /srv/nfs/logbackup
+    file: 
+      path: /srv/nfs/logbackup
+      state: directory      
     
-- name: Configure etc hosts
+- name: Create mountpoints
   hosts: client
   remote_user: azureadmin
   become: yes
