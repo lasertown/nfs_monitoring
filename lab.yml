@@ -135,16 +135,10 @@
     file:
       path: "/etc/delete_to_retry_mount"
       state: touch
-  - name: Install NFS Server
-    zypper:
-      name: nfs-kernel-server
-      state: present
-    environment:
-      ZYPP_LOCK_TIMEOUT: 120
   - name: Enable nfsd
-    command: sudo systemctl enable nfsserver
+    command: sudo systemctl enable nfs-server
   - name: Start nfsd
-    command: sudo systemctl start nfsserver
+    command: sudo systemctl start nfs-server
   - name: Create /srv/nfs/data
     file: 
       path: /srv/nfs/data
