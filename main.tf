@@ -16,7 +16,7 @@ region = module.network0.region
 subnet = module.network0.subnet
 vm_size = "Standard_E4s_v3"
 publisher = "SUSE"
-offer = "sles-sap-15-sp3"
+offer = "sles-15-sp3"
 sku = "gen2"
 _version = "latest"
 }
@@ -28,7 +28,7 @@ region = module.network0.region
 subnet = module.network0.subnet
 vm_size = "Standard_D8s_v5"
 publisher = "SUSE"
-offer = "sles-sap-15-sp3"
+offer = "sles-15-sp3"
 sku = "gen2"
 _version = "latest"
 }
