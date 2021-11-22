@@ -2,9 +2,13 @@ provider "azurerm" {
   features {}
 }
 
+resource "random_id" "name" {
+  byte_length = 8
+}
+
 # Create network interface
 resource "azurerm_network_interface" "nic" {
-    name                      = var.region
+    name                      = "nic-${random_id.name.hex}"
     location                  = var.region
     resource_group_name       = var.rg
 
@@ -16,10 +20,6 @@ resource "azurerm_network_interface" "nic" {
     }
 }
 
-resource "random_id" "name" {
-  byte_length = 8
-}
-
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "client" {
     name                  = "client-${random_id.name.hex}"
@@ -29,7 +29,7 @@ resource "azurerm_linux_virtual_machine" "client" {
     size                  = var.vm_size
 
     os_disk {
-        name              = random_id.name.hex
+        name              = "osdisk-${random_id.name.hex}"
         caching           = "ReadWrite"
         storage_account_type = "Premium_LRS"
         #disk_size_gb      = "128"
@@ -42,7 +42,7 @@ resource "azurerm_linux_virtual_machine" "client" {
         version   = var._version
     }
 
-    computer_name  = "client-${var.region}"
+    computer_name  = "client"
     admin_username = "azureadmin"
     #custom_data    = file("<path/to/file>")
 
