@@ -25,7 +25,7 @@ resource "azurerm_linux_virtual_machine" "client" {
     size                  = var.vm_size
 
     os_disk {
-        name              =  var.region
+        name              = random_id.id.hex + "-" + var.region
         caching           = "ReadWrite"
         storage_account_type = "Premium_LRS"
         #disk_size_gb      = "128"
