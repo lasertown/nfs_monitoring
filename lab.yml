@@ -193,3 +193,44 @@
         nfs-0:/logbackups /hana/logbackups nfs4 defaults 0 0
   - name: Mount Exports
     command: sudo mount -a
+
+- name: Configure node_exporter
+  hosts: all
+  remote_user: azureadmin
+  become: yes
+  tasks:
+  - name: Install node_exporter
+    zypper:
+      name: golang-github-prometheus-node_exporter
+      state: present
+  - name: Configure node_exporter
+    copy:
+      src: config/prometheus-node_exporter
+      dest: /etc/sysconfig/prometheus-node_exporter      
+  - name: Enable prometheus-node_exporter
+    command: sudo systemctl --now enable prometheus-node_exporter
+  - name: Restart prometheus
+    command: sudo systemctl restart prometheus-node_exporter
+    
+- name: Configure node_exporter
+  hosts: nfs
+  remote_user: azureadmin
+  become: yes
+  tasks:
+  - name: Enable SUSE PackageHub
+    command: sudo SUSEConnect -p PackageHub/15.3/x86_64
+    args:  
+      creates: /etc/zypp/repos.d/SUSE_Package_Hub_x86_64:SUSE-PackageHub-15-SP3-Pool.repo
+  - name: Install prometheus
+    zypper:
+      name: golang-github-prometheus-prometheus
+      state: present
+  - name: Enable prometheus
+    command: sudo systemctl --now enable prometheus
+  - name: Configure prometheus
+    copy:
+      src: config/prometheus.yml
+      dest: /etc/prometheus/
+  - name: Restart prometheus
+    command: sudo systemctl restart prometheus
+    
