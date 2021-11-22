@@ -213,7 +213,7 @@
     command: sudo systemctl restart prometheus-node_exporter
     
 - name: Configure node_exporter
-  hosts: nfs
+  hosts: bastion
   remote_user: azureadmin
   become: yes
   tasks:
@@ -237,3 +237,7 @@
     zypper:
       name: grafana
       state: present
+  - name: Enable grafana
+    command: sudo systemctl --now enable grafana-server
+  - name: Restart grafana
+    command: sudo systemctl restart grafana-server   
