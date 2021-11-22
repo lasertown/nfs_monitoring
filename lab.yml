@@ -232,5 +232,8 @@
       src: config/prometheus.yml
       dest: /etc/prometheus/
   - name: Restart prometheus
-    command: sudo systemctl restart prometheus
-    
+    command: sudo systemctl restart prometheus    
+  - name: Install grafana
+    zypper:
+      name: grafana
+      state: present
