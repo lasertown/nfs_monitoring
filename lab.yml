@@ -187,5 +187,5 @@
         nfs-0:/log /hana/log nfs4 defaults 0 0
         nfs-0:/shared /hana/shared nfs4 defaults 0 0
         nfs-0:/logbackups /hana/logbackups nfs4 defaults 0 0
-  - name: Enable nfsd
+  - name: Mount Exports
     command: sudo mount -a
