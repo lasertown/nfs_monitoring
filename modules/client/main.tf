@@ -12,7 +12,7 @@ resource "azurerm_network_interface" "nic" {
         name                          = "client-private"
         subnet_id                     = var.subnet
         private_ip_address_allocation = "Static"
-        private_ip_address            = "10.0.0.100"
+        private_ip_address            = var.private_ip_address
     }
 }
 
