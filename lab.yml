@@ -203,6 +203,8 @@
     zypper:
       name: golang-github-prometheus-node_exporter
       state: present
+    environment:
+      ZYPP_LOCK_TIMEOUT: 120      
   - name: Configure node_exporter
     copy:
       src: config/prometheus-node_exporter
@@ -225,6 +227,8 @@
     zypper:
       name: golang-github-prometheus-prometheus
       state: present
+    environment:
+      ZYPP_LOCK_TIMEOUT: 120      
   - name: Enable prometheus
     command: sudo systemctl --now enable prometheus
   - name: Configure prometheus
@@ -237,6 +241,8 @@
     zypper:
       name: grafana
       state: present
+    environment:
+      ZYPP_LOCK_TIMEOUT: 120
   - name: Enable grafana
     command: sudo systemctl --now enable grafana-server
   - name: Restart grafana
