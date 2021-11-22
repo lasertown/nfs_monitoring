@@ -52,6 +52,10 @@
       block: |
         # NFS Server
         10.0.0.6 nfs-0
+        # Clients
+        10.0.0.10 client-0
+        10.0.0.11 client-1
+        10.0.0.12 client-2
 
 - name: Push SSH config
   hosts: all
