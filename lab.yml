@@ -48,7 +48,6 @@
 
 - name: Push SSH config
   hosts: all
-  debugger: on_failed
   remote_user: azureadmin
   tasks:
   - name: Push SSH config to all VMs
@@ -57,6 +56,12 @@
       dest: /home/azureadmin/.ssh/config
       owner: azureadmin
       group: users
+        
+- name: Configure etc hosts
+  hosts: all
+  remote_user: azureadmin
+  become: yes
+  tasks:
   - name: Configure etc hosts
     blockinfile:
       path: /etc/hosts
@@ -68,7 +73,7 @@
         10.0.0.10 client-0
         10.0.0.11 client-1
         10.0.0.12 client-2
-
+        
 - name: Comfigure NFS Server
   hosts: nfs
   remote_user: azureadmin
