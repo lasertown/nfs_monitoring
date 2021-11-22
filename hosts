@@ -7,3 +7,6 @@ bastion-node ansible_host=10.0.0.100
 
 [nfs]
 nfs-node0 ansible_host=10.0.0.6
+
+[client]
+client-node0 ansible_host=10.0.0.10
