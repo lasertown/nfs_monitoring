@@ -25,6 +25,11 @@ variable "vm_size" {
 # sku       = "gen2"
 # _version   = "latest"
 ################################
+# offer = "SLES"
+# publisher = "SUSE"
+# sku = "15"
+# version = "latest"
+################################
 variable "publisher" {
   description = "Publisher of the image used to create VM"
 }
