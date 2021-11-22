@@ -10,3 +10,5 @@ nfs-node0 ansible_host=10.0.0.6
 
 [client]
 client-node0 ansible_host=10.0.0.10
+client-node1 ansible_host=10.0.0.11
+client-node2 ansible_host=10.0.0.12
