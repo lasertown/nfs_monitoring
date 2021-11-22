@@ -146,3 +146,24 @@
   - name: Start nfsd
     command: sudo systemctl start nfsserver
     
+- name: Configure etc hosts
+  hosts: client
+  remote_user: azureadmin
+  become: yes
+  tasks:
+  - name: Create /hana/data
+    file: 
+      path: /hana/data
+      state: directory
+  - name: Create /hana/log
+    file: 
+      path: /hana/log
+      state: directory
+  - name: Create /hana/shared
+    file: 
+      path: /hana/shared
+      state: directory
+  - name: Create /hana/logbackup
+    file: 
+      path: /hana/logbackup
+      state: directory  
