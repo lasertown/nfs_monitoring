@@ -1,0 +1,10 @@
+groups:
+- name: nfs_client
+  rules:
+  - alert: HighThroughput
+    expr: sum(irate(node_mountstats_nfs_operations_sent_bytes_total{export="nfs-0:/data",job=~"nfs_client"}[5m])) + sum(irate(node_mountstats_nfs_operations_received_bytes_total{export="10.0.0.4:/NW1",job=~"bastion"}[5m])) > 31457280
+    for: 10m
+    labels:
+      severity: page
+    annotations:
+      summary: High Throughput for host {{ $labels.instance }} for volume /hana/data
