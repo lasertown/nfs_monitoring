@@ -235,6 +235,10 @@
     copy:
       src: config/prometheus.yml
       dest: /etc/prometheus/
+  - name: Configure prometheus rules
+    copy:
+      src: config/nfs_client.rules
+      dest: /etc/prometheus/   
   - name: Restart prometheus
     command: sudo systemctl restart prometheus    
   - name: Install grafana
