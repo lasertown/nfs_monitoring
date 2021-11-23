@@ -124,7 +124,7 @@
       path: "/etc/delete_to_retry_mkfs"
       state: touch
   - name: Create fstab entry
-    command: echo "/dev/NFS/export /srv/nfs xfs defaults 0 0" >> /etc/fstab
+    command: echo "/dev/NFS/export0 /srv/nfs xfs defaults 0 0" >> /etc/fstab
     args:
       creates: /etc/delete_to_retry_fstab
   - name: Create pass file
