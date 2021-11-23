@@ -14,7 +14,8 @@ global:
 rule_files:
   # - "first.rules"
   # - "second.rules"
-
+  nfs_client.rules
+  
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
